@@ -1,12 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-type Tprops = {
-    info: any
-}
+import { List } from 'antd'
+import MainInfo from './MainInfo'
 
 const Container = styled.div`
-    width: 80%;
-    margin: 0 auto;
 `
 
 // type Tinfo = {
@@ -17,11 +14,24 @@ const Container = styled.div`
 //     avatarfull: string
 // }
 
-export default (props: Tprops) => {
-    console.log(props.info, 'profile-component')
+type Titem = {
+    match_id: number
+}
+export default (props: any) => {
     return (
         <Container>
-            {props.info && <img src={props.info.profile.avatarfull} alt=""/>}
+            <MainInfo {...props}></MainInfo>
+            <List
+            itemLayout="horizontal"
+            dataSource={props.recentMatches}
+            renderItem={(item:any) => (
+                <List.Item>
+                    <List.Item.Meta
+                    title={<a href="https://ant.design">{item.match_id}</a>}>
+                    </List.Item.Meta>
+                </List.Item>
+            )}>
+            </List>
         </Container>
     )
 }

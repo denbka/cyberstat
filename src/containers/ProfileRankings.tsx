@@ -10,7 +10,7 @@ type Tparams = {
 
 type Tprops = {
     getProfileInfo: (arg0: string) => void,
-    profileInfo: any,
+    profile: any,
     loading: boolean
 }
 
@@ -24,20 +24,23 @@ type Tprops = {
 
 const Profile = (props: Tprops) => {
     let params:Tparams = useParams()
+    console.log(props.profile.profile)
     useEffect(():any => {
+        // console.log(props.loading)
         props.getProfileInfo(params.profile_id)
-    }, [params])
-
-    if (!props.loading) {
-        return <ProfileComponent {...props.profileInfo}></ProfileComponent>
+        // console.log(props)
+    }, [])
+    // console.log(props)
+    if (!props.profile.loading) {
+        return <ProfileComponent info={props.profile.info}></ProfileComponent>
     } else return <div>Загрузка</div>
 
 }
 
 const mapStateToProps = (state: any) => {
+    console.log(state)
     return {
-        profileInfo: state.profile.info,
-        loading: state.profile.loading
+        profile: state.profile,
     }
 }
 

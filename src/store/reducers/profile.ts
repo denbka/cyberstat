@@ -2,11 +2,10 @@ import { TTest } from './types/testTypes'
 
 const initialState: TTest = {
     pageTitle: 'Главная',
-    loading: false,
+    loading: true,
 }
 
 export default (state = initialState, action: { type: string, data: any }) => {
-    console.log(action.type)
     switch (action.type) {
         case 'FETCHED_PROFILE_INFO': {
             return {
