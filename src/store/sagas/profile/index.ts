@@ -7,12 +7,12 @@ type TFetchProfileInfo = {
     profile_id: string
 }
 
-const addHeroNamesById = (matches: []) => {
+const addHeroById = (matches: []) => {
     return matches.map((match:any) => {
-        const heroObj = <any>heroesList.heroes.find((hero:any) => hero.id === match.hero_id)
+        const hero = <any>heroesList.heroes.find((hero:any) => hero.id === match.hero_id)
         return {
             ...match,
-            icon_name: heroObj.name
+            hero
         }
     })
 }
@@ -23,7 +23,7 @@ export function* fetchProfileInfo({profile_id}: TFetchProfileInfo) {
         const fetchedDataWL = yield call(axios.get, `/api/players/${profile_id}/wl`)
         let fetchedRecentlyMatches = yield call(axios.get, `/api/players/${profile_id}/recentMatches`)
         const fetchedHeroes = yield call(axios.get, `/api/players/${profile_id}/heroes`)
-        fetchedRecentlyMatches = addHeroNamesById(fetchedRecentlyMatches.data)
+        fetchedRecentlyMatches = addHeroById(fetchedRecentlyMatches.data)
         const summaryData = {
             ...fetchedData.data,
             wl: fetchedDataWL.data,
@@ -34,7 +34,6 @@ export function* fetchProfileInfo({profile_id}: TFetchProfileInfo) {
         yield put(fetchedSuccess(summaryData))
     } catch(e) {
         console.log(e)
-        // yield put(setLoading(false))
     }
 }
 

@@ -6,6 +6,18 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import { store } from './configure-store'
 import { BrowserRouter } from 'react-router-dom'
+import Moment from 'react-moment'
+import 'moment-timezone'
+import 'moment/locale/ru'
+
+Moment.globalTimezone = 'America/Los_Angeles'
+Moment.globalLocale = 'ru'
+Moment.globalLocal = true
+
+Moment.globalFilter = (d:any) => {
+  return d
+};
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

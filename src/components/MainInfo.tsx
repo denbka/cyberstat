@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 const Container = styled.div`
-    border-bottom: 1px solid grey;
     display: flex;
     justify-content: space-between;
     align-items: center;
