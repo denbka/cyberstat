@@ -88,7 +88,7 @@ const MainInfo = (props:any) => {
             <InfoContainer>
             <Avatar src={props.profile.avatarfull} alt=""/>
                 <Info>
-                    <h3>{props.profile.personaname}</h3>
+                    <h2>{props.profile.personaname}</h2>
                     <InfoItemContainer>
                         <InfoItem>
                             <span>Победы</span>

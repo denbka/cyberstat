@@ -12,18 +12,10 @@ const Main = styled.main`
 
 type Tprops = {
   children: React.ReactNode
-//   isAuthenticated: boolean
 }
 
 const MainLayout: React.FC<Tprops> = (props: Tprops) => {
-//   const [menu, setMenu] = useState(false)
-//   const toggleMenuHandler = () => {
-//     setMenu(!menu)
-//   }
-//   const menuCloseHandler = () => {
-//     setMenu(false)
-//   }
-  
+
   return (
       <Main>
           <Navbar></Navbar>
@@ -31,10 +23,5 @@ const MainLayout: React.FC<Tprops> = (props: Tprops) => {
       </Main>
   )
 }
-// const mapStateToProps = (state: any) => {
-//   return {
-//     isAuthenticated: !!state.auth.token
-//   }
-// }
 
 export default MainLayout

@@ -27,6 +27,7 @@ export default (props: any) => {
             renderItem={(item:any) => (
                 <List.Item>
                     <List.Item.Meta
+                    avatar={<img src={`https://steamcdn-a.akamaihd.net/apps/dota2/images/heroes/${item.icon_name}_sb.png`} />}
                     title={<a href="https://ant.design">{item.match_id}</a>}>
                     </List.Item.Meta>
                 </List.Item>

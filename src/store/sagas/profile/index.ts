@@ -1,23 +1,37 @@
 import { put, call, takeEvery, all } from 'redux-saga/effects'
 import axios from 'axios'
 import { fetchedSuccess, setLoading } from '../../actions/profile'
+import heroesList from '../../../helpers/heroesList.json'
 type TFetchProfileInfo = {
     type: string,
     profile_id: string
 }
+
+const addHeroNamesById = (matches: []) => {
+    return matches.map((match:any) => {
+        const heroObj = <any>heroesList.heroes.find((hero:any) => hero.id === match.hero_id)
+        return {
+            ...match,
+            icon_name: heroObj.name
+        }
+    })
+}
+
 export function* fetchProfileInfo({profile_id}: TFetchProfileInfo) {
     try {
-        //jeka 284685272 
-        //ya 156196043
-        //shergarat 372801387
-        // yield put(setLoading(true))
         const fetchedData = yield call(axios.get, `/api/players/${profile_id}`)
         const fetchedDataWL = yield call(axios.get, `/api/players/${profile_id}/wl`)
-        const fetchedRecentlyMatches = yield call(axios.get, `/api/players/${profile_id}/recentMatches`)
+        let fetchedRecentlyMatches = yield call(axios.get, `/api/players/${profile_id}/recentMatches`)
         const fetchedHeroes = yield call(axios.get, `/api/players/${profile_id}/heroes`)
-        const summaryData = {...fetchedData.data, wl: fetchedDataWL.data, recentMatches: fetchedRecentlyMatches.data, heroes: fetchedHeroes.data}
+        fetchedRecentlyMatches = addHeroNamesById(fetchedRecentlyMatches.data)
+        const summaryData = {
+            ...fetchedData.data,
+            wl: fetchedDataWL.data,
+            recentMatches: fetchedRecentlyMatches,
+            heroes: fetchedHeroes.data,
+        }
+        console.log(summaryData)
         yield put(fetchedSuccess(summaryData))
-        // yield put(setLoading(false))
     } catch(e) {
         console.log(e)
         // yield put(setLoading(false))
