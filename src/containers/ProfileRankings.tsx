@@ -26,11 +26,8 @@ const Profile = (props: Tprops) => {
     let params:Tparams = useParams()
     console.log(props.profile.profile)
     useEffect(():any => {
-        // console.log(props.loading)
         props.getProfileInfo(params.profile_id)
-        // console.log(props)
     }, [])
-    // console.log(props)
     if (!props.profile.loading) {
         return <ProfileComponent info={props.profile.info}></ProfileComponent>
     } else return <div>Загрузка</div>

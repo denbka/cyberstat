@@ -1,10 +1,18 @@
 import { put, call, takeEvery, all } from 'redux-saga/effects'
-import axios from 'axios'
+import axios, { AxiosTransformer } from 'axios'
 import { fetchedSuccess, setLoading } from '../actions/profile'
 import heroesList from '../../helpers/heroesList.json'
 type TFetchProfileInfo = {
     type: string,
     profile_id: string
+}
+
+type Tparams = {
+    query?: string[]
+}
+function* request(url: string, params: Tparams = {})  {
+    const response = yield call(axios.get as AxiosTransformer, url, params)
+    return response 
 }
 
 const parseMatches = (matches: []) => {
@@ -22,10 +30,10 @@ const parseMatches = (matches: []) => {
 
 export function* fetchProfileInfo({profile_id}: TFetchProfileInfo) {
     try {
-        const fetchedData = yield call(axios.get, `/api/players/${profile_id}`)
-        const fetchedDataWL = yield call(axios.get, `/api/players/${profile_id}/wl`)
-        let fetchedRecentlyMatches = yield call(axios.get, `/api/players/${profile_id}/recentMatches`)
-        const fetchedHeroes = yield call(axios.get, `/api/players/${profile_id}/heroes`)
+        const fetchedData = yield request(`/api/players/${profile_id}`)
+        const fetchedDataWL = yield request(`/api/players/${profile_id}/wl`)
+        let fetchedRecentlyMatches = yield request(`/api/players/${profile_id}/recentMatches`)
+        const fetchedHeroes = yield request(`/api/players/${profile_id}/heroes`)
         fetchedRecentlyMatches = parseMatches(fetchedRecentlyMatches.data)
         const summaryData = {
             ...fetchedData.data,

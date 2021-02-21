@@ -15,7 +15,6 @@ export default (props:Tprops) => {
     const history = useHistory()
     const [ value, setValue ] = useState('')
     const onChange = (props: any) => {
-        console.log(props)
     }
     return (
         <Select

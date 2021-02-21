@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { List, Table } from 'antd'
-import MainInfo from './MainInfo'
+import { Table, MainInfo } from './index'
 import Moment from 'react-moment'
 const Container = styled.div`
 `
@@ -97,7 +96,6 @@ const columns = [
         dataIndex: 'mode',
         key: 'mode',
         render: (props: undefined, match:Tmatch) => {
-            console.log(match, '3')
             return (
                 <>
                     <span>{getSkill(match.skill)}</span>
@@ -135,7 +133,7 @@ export default (props: any) => {
             <MainInfo {...props}></MainInfo>
             <Table
             columns={columns}
-            dataSource={props.recentMatches}>
+            data={props.recentMatches}>
             </Table>
         </Container>
     )

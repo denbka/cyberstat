@@ -76,7 +76,6 @@ const Mark = styled.mark<MarkProps>`
 `
 
 const MainInfo = (props:any) => {
-    console.log(props)
 
     const getWR = () => {
         const wr = props.wl.win / (props.wl.win + props.wl.lose)

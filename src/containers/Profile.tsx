@@ -24,6 +24,7 @@ type Tprops = {
 
 const Profile = (props: Tprops) => {
     let params:Tparams = useParams()
+
     useEffect(():any => {
         props.getProfileInfo(params.profile_id)
     }, [params])

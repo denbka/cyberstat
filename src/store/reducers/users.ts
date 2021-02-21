@@ -6,7 +6,6 @@ const initialStore = {
 export default (store = initialStore, action: { type: string, data: any }) => {
     switch(action.type) {
         case 'FETCHED_SUCCESS': {
-            console.log(action.data, '123')
             return {
                 ...store,
                 list: action.data,
